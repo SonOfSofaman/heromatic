@@ -8,15 +8,21 @@ namespace com.SonOfSofaman.Heromatic.CLI
 	public class Parameters
 	{
 		public bool Valid { get; private set; }
-		public int Seed { get; private set; }
+		private int _Seed;
+		public int Seed { get { return this._Seed; } }
+		private string _CharacterName;
+		public string CharacterName { get { return this.Valid ? this._CharacterName : null; } set { this._CharacterName = value; } }
+		public bool ManualCharacterName { get { return this.CharacterName != null; } }
 
 		public Parameters(string[] args)
 		{
 			this.Valid = false;
-			this.Seed = 0;
+			this._Seed = 0;
+			this._CharacterName = null;
 
 			List<ParameterMatcher> parameterMatchers = new List<ParameterMatcher>();
 			parameterMatchers.Add(new ParameterMatcher("^(?<seed>[-+]?[0-9]+)$", true, this.SetSeed));
+			parameterMatchers.Add(new ParameterMatcher("^(?<name>[^\\s]+)$", false, this.SetCharacterName));
 
 			foreach (string arg in args)
 			{
@@ -30,14 +36,17 @@ namespace com.SonOfSofaman.Heromatic.CLI
 				}
 			}
 
-			this.Valid = parameterMatchers.All(pm => pm.Required && pm.Satisfied);
+			this.Valid = parameterMatchers.All(pm => pm.Required && pm.Satisfied || !pm.Required);
 		}
 
 		private void SetSeed(Match match)
 		{
-			int seed;
-			this.Valid &= Int32.TryParse(match.Groups["seed"].Value, out seed);
-			this.Seed = seed;
+			this.Valid &= Int32.TryParse(match.Groups["seed"].Value, out this._Seed);
+		}
+
+		private void SetCharacterName(Match match)
+		{
+			this.CharacterName = match.Groups["name"].Value;
 		}
 
 		class ParameterMatcher
