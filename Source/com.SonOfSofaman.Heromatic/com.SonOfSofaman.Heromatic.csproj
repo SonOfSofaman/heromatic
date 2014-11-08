@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Character.cs" />
     <Compile Include="CharacterBuilder.cs" />
+    <Compile Include="NameGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

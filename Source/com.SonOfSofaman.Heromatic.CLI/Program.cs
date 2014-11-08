@@ -13,7 +13,7 @@ namespace com.SonOfSofaman.Heromatic.CLI
 			{
 				Program.RNG = new Random(parameters.Seed);
 
-				Character character = CharacterBuilder.Construct(parameters.ManualCharacterName, parameters.CharacterName);
+				Character character = CharacterBuilder.Construct(RNG, parameters.ManualCharacterName, parameters.CharacterName);
 
 				Console.WriteLine("{0} begins a life of adventure!", character.Name);
 			}
