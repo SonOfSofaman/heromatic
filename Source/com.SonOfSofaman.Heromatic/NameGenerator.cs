@@ -9,18 +9,83 @@ namespace com.SonOfSofaman.Heromatic
 		private static string Consonants = "bbbbbccccddddfffgghhjklllllllllmmmmmmmmmnnnnnnnnnpppqrrrrsssssssssssssssstttvwxz";
 		private static string[] Patterns =
 		{
+			"cv",
 			"cvc",
 			"cvcv",
-
+			"cvvc",
 			"cvrc",
+			"cvrcv",
+			"cvrcvr",
+			"cvrcvc",
+			"cvrcvrc",
+			"cvcrv",
 			"cvcr",
 
-			"cvcv cvc",
+			"vc",
+			"vcv",
+			"vcvc",
+			"vcvcv",
 
+			"cv vc",
+			"cvc vcv",
+			"cv vcvcv",
+			"cvvc cv",
+			"cvvc vc",
+			"cvcv cvc",
+			"cvvc cvvc",
+			"cvrc cvrc",
+
+			"c'cv",
+			"c'cvv",
 			"c'cvc",
 		};
 
-		public static string GenerateCharacterName(Random RNG)
+		/*
+			{geog0} of {random}
+		*/
+		private static string[] geog0 =
+		{
+			"Hills",
+			"Valley",
+			"Plains",
+			"Forest",
+			"Steppes",
+		};
+		/*
+			{random} {geog1}
+		*/
+		private static string[] geog1 =
+		{
+			"Hills",
+			"Valley",
+			"Plain",
+			"Forest",
+			"Tundra",
+			"Steppes",
+			"Brook",
+			"Lake",
+		};
+		/*
+			{geog2} {random}
+		*/
+		private static string[] geog2 =
+		{
+			"Mount",
+			"Lake",
+		};
+
+		private static string[] formats =
+		{
+			"{random}",
+			"{random}",
+			"{random}",
+
+			"{geog0} of {random}",
+			"{random} {geog1}",
+			"{geog2} {random}",
+		};
+
+		public static string GenerateRandomProperNoun(Random RNG)
 		{
 			StringBuilder builder = new StringBuilder();
 			bool capitalizeThisCharacter = true;
@@ -86,6 +151,19 @@ namespace com.SonOfSofaman.Heromatic
 			}
 
 			return builder.ToString();
+		}
+
+		public static string GeneratePlaceName(Random RNG)
+		{
+			string result;
+
+			result = formats[RNG.Next(formats.Length)];
+			result = result.Replace("{geog0}", geog0[RNG.Next(geog0.Length)]);
+			result = result.Replace("{geog1}", geog1[RNG.Next(geog1.Length)]);
+			result = result.Replace("{geog2}", geog2[RNG.Next(geog2.Length)]);
+			result = result.Replace("{random}", GenerateRandomProperNoun(RNG));
+
+			return result;
 		}
 	}
 }

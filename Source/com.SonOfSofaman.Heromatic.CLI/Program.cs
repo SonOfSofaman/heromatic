@@ -13,9 +13,10 @@ namespace com.SonOfSofaman.Heromatic.CLI
 			{
 				Program.RNG = new Random(parameters.Seed);
 
-				Character character = CharacterBuilder.Construct(RNG, parameters.ManualCharacterName, parameters.CharacterName);
+				GameState gameState = GameStateBuilder.Construct(RNG, parameters.ManualCharacterName, parameters.CharacterName);
 
-				Console.WriteLine("{0} begins a life of adventure!", character.Name);
+				Console.Clear();
+				Console.WriteLine("{0} begins a life of adventure in {1}!", gameState.Character.Name, gameState.Character.Home.Name);
 			}
 			else
 			{

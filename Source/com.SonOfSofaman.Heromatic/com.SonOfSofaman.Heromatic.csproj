@@ -41,7 +41,10 @@
   <ItemGroup>
     <Compile Include="Character.cs" />
     <Compile Include="CharacterBuilder.cs" />
+    <Compile Include="GameState.cs" />
+    <Compile Include="GameStateBuilder.cs" />
     <Compile Include="NameGenerator.cs" />
+    <Compile Include="Place.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
