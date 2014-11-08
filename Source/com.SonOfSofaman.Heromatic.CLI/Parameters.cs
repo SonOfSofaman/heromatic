@@ -22,7 +22,7 @@ namespace com.SonOfSofaman.Heromatic.CLI
 
 			List<ParameterMatcher> parameterMatchers = new List<ParameterMatcher>();
 			parameterMatchers.Add(new ParameterMatcher("^(?<seed>[-+]?[0-9]+)$", true, this.SetSeed));
-			parameterMatchers.Add(new ParameterMatcher("^(?<name>[^\\s]+)$", false, this.SetCharacterName));
+			parameterMatchers.Add(new ParameterMatcher("^(?<name>.+)$", false, this.SetCharacterName));
 
 			foreach (string arg in args)
 			{

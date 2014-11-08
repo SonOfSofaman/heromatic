@@ -135,5 +135,14 @@ namespace com.SonOfSofaman.Heromatic.CLI.UnitTests
 			Assert.AreEqual("Bob", parameters.CharacterName);
 		}
 
+		[TestMethod]
+		public void ctor_Integer_WithNameContainingSpaces()
+		{
+			Parameters parameters = new Parameters(new string[] { "1234", "Dread Pirate Roberts" });
+			Assert.AreEqual(true, parameters.Valid);
+			Assert.AreEqual(1234, parameters.Seed);
+			Assert.AreEqual(true, parameters.ManualCharacterName);
+			Assert.AreEqual("Dread Pirate Roberts", parameters.CharacterName);
+		}
 	}
 }
