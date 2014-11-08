@@ -4,15 +4,12 @@ namespace com.SonOfSofaman.Heromatic.CLI
 {
 	class Program
 	{
-		internal static Random RNG { get; private set; }
-
 		static void Main(string[] args)
 		{
 			Parameters parameters = new Parameters(args);
 			if (parameters.Valid)
 			{
-				Program.RNG = new Random(parameters.Seed);
-
+				Random RNG = new Random(parameters.Seed);
 				GameState gameState = GameStateBuilder.Construct(RNG, parameters.ManualCharacterName, parameters.CharacterName);
 
 				Console.Clear();
