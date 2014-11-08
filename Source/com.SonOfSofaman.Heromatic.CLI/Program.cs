@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace com.SonOfSofaman.Heromatic.CLI
 {
@@ -10,6 +6,15 @@ namespace com.SonOfSofaman.Heromatic.CLI
 	{
 		static void Main(string[] args)
 		{
+			Parameters parameters = new Parameters(args);
+			if (parameters.Valid)
+			{
+				int seed = parameters.Seed;
+			}
+			else
+			{
+				Console.WriteLine("SYNTAX:\n\n\theromatic {{seed}}\n\n\twhere\n\n\t{{seed}} between {0} and {1}, inclusive.", Int32.MinValue, Int32.MaxValue);
+			}
 		}
 	}
 }
