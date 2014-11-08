@@ -4,12 +4,18 @@ namespace com.SonOfSofaman.Heromatic.CLI
 {
 	class Program
 	{
+		internal static Random RNG { get; private set; }
+
 		static void Main(string[] args)
 		{
 			Parameters parameters = new Parameters(args);
 			if (parameters.Valid)
 			{
-				int seed = parameters.Seed;
+				Program.RNG = new Random(parameters.Seed);
+
+				Character character = CharacterBuilder.Construct(parameters.ManualCharacterName, parameters.CharacterName);
+
+				Console.WriteLine("{0} begins a life of adventure!", character.Name);
 			}
 			else
 			{
