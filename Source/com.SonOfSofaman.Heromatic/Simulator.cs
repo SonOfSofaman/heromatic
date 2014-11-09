@@ -35,7 +35,25 @@ namespace com.SonOfSofaman.Heromatic
 
 		private bool NextTurn()
 		{
-			this.OnSimulatorEvent(String.Format("Turn #{0}", this.TurnIndex));
+			// Step 1: Resolve any encounters
+			// TODO: Implement an encounter generator and resolver. The result of any encounter may affect a character's fondness of place in which the encounter took place.
+
+			// Step 2: Move (or stay)
+			// TODO: Base this decision on the character's fondness for a place.
+			switch (this.RNG.Next(4))
+			{
+				case 0:
+				{
+					this.OnSimulatorEvent("Stays put. He likes it here.");
+					break;
+				}
+				default:
+				{
+					this.OnSimulatorEvent("Moves somewhere else.");
+					break;
+				}
+			}
+
 			this.TurnIndex++;
 			return (this.TurnIndex >= 10UL);
 		}
