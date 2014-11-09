@@ -24,7 +24,7 @@ namespace com.SonOfSofaman.Heromatic
 
 		public void Run()
 		{
-			this.OnSimulatorEvent(String.Format("{0} begins a life of adventure in {1}!", this.GameState.Character.Name, this.GameState.Character.Home.Name));
+			this.OnSimulatorEvent(String.Format("{0} begins a life of adventure in {1}, a place of which he is {2} fond.", this.GameState.Character.Name, this.GameState.Character.Home.Name, this.GameState.Character.Home.Fondness));
 
 			bool done = false;
 			while (!done)
@@ -39,19 +39,14 @@ namespace com.SonOfSofaman.Heromatic
 			// TODO: Implement an encounter generator and resolver. The result of any encounter may affect a character's fondness of place in which the encounter took place.
 
 			// Step 2: Move (or stay)
-			// TODO: Base this decision on the character's fondness for a place.
-			switch (this.RNG.Next(4))
+			Place place = this.GameState.Character.CurrentPlace;
+			if (this.RNG.NextDouble() < place.Fondness)
 			{
-				case 0:
-				{
-					this.OnSimulatorEvent("Stays put. He likes it here.");
-					break;
-				}
-				default:
-				{
-					this.OnSimulatorEvent("Moves somewhere else.");
-					break;
-				}
+				this.OnSimulatorEvent("Stays put. He likes it here.");
+			}
+			else
+			{
+				this.OnSimulatorEvent("Moves somewhere else.");
 			}
 
 			this.TurnIndex++;
