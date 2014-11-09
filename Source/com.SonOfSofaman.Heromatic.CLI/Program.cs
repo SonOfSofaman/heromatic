@@ -9,11 +9,13 @@ namespace com.SonOfSofaman.Heromatic.CLI
 			Parameters parameters = new Parameters(args);
 			if (parameters.Valid)
 			{
+				Console.Clear();
+
 				Random RNG = new Random(parameters.Seed);
 				GameState gameState = GameStateBuilder.Construct(RNG, parameters.ManualCharacterName, parameters.CharacterName);
-
-				Console.Clear();
-				Console.WriteLine("{0} begins a life of adventure in {1}!", gameState.Character.Name, gameState.Character.Home.Name);
+				Simulator simulator = new Simulator(RNG, gameState);
+				simulator.SimulatorEvent += (object sender, SimulatorEventArgs e) => { Console.WriteLine("{0}\t{1}", e.TurnIndex, e.Message); };
+				simulator.Run();
 			}
 			else
 			{

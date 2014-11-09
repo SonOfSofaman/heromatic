@@ -46,6 +46,9 @@
     <Compile Include="NameGenerator.cs" />
     <Compile Include="Place.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Simulator.cs" />
+    <Compile Include="SimulatorEventArgs.cs" />
+    <Compile Include="SimulatorEventHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
