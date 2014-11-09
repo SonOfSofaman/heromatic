@@ -6,7 +6,7 @@ namespace com.SonOfSofaman.Heromatic
 	{
 		public static GameState Construct(Random RNG, bool manualCharacterName, string characterName)
 		{
-			Place home = new Place(NameGenerator.GeneratePlaceName(RNG));
+			Place home = PlaceMaker.MakePlace(RNG);
 			home.Fondness = RNG.NextDouble();
 			Character character = CharacterBuilder.Construct(RNG, manualCharacterName, characterName, home);
 

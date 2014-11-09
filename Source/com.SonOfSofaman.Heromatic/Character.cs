@@ -12,5 +12,11 @@
 			this.Home = home;
 			this.CurrentPlace = home;
 		}
+
+		public void Visit(Place place)
+		{
+			this.CurrentPlace = place;
+			this.CurrentPlace.Visit();
+		}
 	}
 }

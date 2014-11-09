@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace com.SonOfSofaman.Heromatic
 {
@@ -42,15 +44,33 @@ namespace com.SonOfSofaman.Heromatic
 			Place place = this.GameState.Character.CurrentPlace;
 			if (this.RNG.NextDouble() < place.Fondness)
 			{
-				this.OnSimulatorEvent("Stays put. He likes it here.");
+				this.OnSimulatorEvent(String.Format("{0} stays awhile in {1}.", this.GameState.Character.Name, this.GameState.Character.CurrentPlace.Name));
 			}
 			else
 			{
-				this.OnSimulatorEvent("Moves somewhere else.");
+				Place currentPlace = this.GameState.Character.CurrentPlace;
+				int routeIndex = RNG.Next(currentPlace.Routes.Count);
+				List<Direction> directions = currentPlace.Routes.Keys.ToList();
+				Direction directionToNextPlace = directions[routeIndex];
+				Route routeToNextPlace = currentPlace.Routes[directionToNextPlace];
+				bool isANewPlace = false;
+
+				if (routeToNextPlace.Destination == null)
+				{
+					Direction reciprocal = (Direction)(((int)directionToNextPlace + 4) % 8);
+					Place newPlace = PlaceMaker.MakePlace(this.RNG);
+					this.GameState.Places.Add(newPlace);
+					routeToNextPlace.Destination = newPlace;
+					newPlace.Routes[reciprocal] = new Route(reciprocal, currentPlace);
+					isANewPlace = true;
+				}
+				this.GameState.Character.Visit(routeToNextPlace.Destination);
+				string placeMemo = isANewPlace ? ", a place he has never been to before." : ".";
+				this.OnSimulatorEvent(String.Format("{0} travels to {1}{2}", this.GameState.Character.Name, this.GameState.Character.CurrentPlace.Name, placeMemo));
 			}
 
 			this.TurnIndex++;
-			return (this.TurnIndex >= 10UL);
+			return (this.TurnIndex >= 100UL);
 		}
 	}
 }

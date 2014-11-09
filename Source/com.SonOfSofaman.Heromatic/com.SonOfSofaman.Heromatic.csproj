@@ -41,12 +41,15 @@
   <ItemGroup>
     <Compile Include="Character.cs" />
     <Compile Include="CharacterBuilder.cs" />
+    <Compile Include="Direction.cs" />
     <Compile Include="Fondness.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="GameStateBuilder.cs" />
     <Compile Include="NameGenerator.cs" />
     <Compile Include="Place.cs" />
+    <Compile Include="PlaceMaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Route.cs" />
     <Compile Include="Simulator.cs" />
     <Compile Include="SimulatorEventArgs.cs" />
     <Compile Include="SimulatorEventHandler.cs" />
