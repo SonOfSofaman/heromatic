@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace com.SonOfSofaman.Heromatic
+﻿namespace com.SonOfSofaman.Heromatic
 {
 	public class Place
 	{
