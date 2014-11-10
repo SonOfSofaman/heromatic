@@ -46,6 +46,7 @@
     <Compile Include="GameState.cs" />
     <Compile Include="GameStateBuilder.cs" />
     <Compile Include="NameGenerator.cs" />
+    <Compile Include="OrdinalExtensions.cs" />
     <Compile Include="Place.cs" />
     <Compile Include="PlaceMaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

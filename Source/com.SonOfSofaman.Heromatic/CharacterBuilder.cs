@@ -7,7 +7,8 @@ namespace com.SonOfSofaman.Heromatic
 		public static Character Construct(Random RNG, bool manualCharacterName, string providedCharacterName, Place home)
 		{
 			string name = manualCharacterName ? providedCharacterName : NameGenerator.GenerateRandomProperNoun(RNG);
-			return new Character(name, home);
+			double startingAge = 16.0 + RNG.NextDouble() * 5 + RNG.NextDouble() * 5;
+			return new Character(name, home, startingAge);
 		}
 	}
 }
