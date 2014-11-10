@@ -26,7 +26,7 @@ namespace com.SonOfSofaman.Heromatic
 
 		public void Run()
 		{
-			this.OnSimulatorEvent(String.Format("{0} begins a life of adventure in {1}, a place of which he is {2} fond.", this.GameState.Character, this.GameState.Character.Home.Name, this.GameState.Character.Home.Fondness));
+			this.OnSimulatorEvent(string.Format("{0} begins a life of adventure in {1}, a place of which he is {2} fond.", this.GameState.Character, this.GameState.Character.Home.Name, this.GameState.Character.Home.Fondness));
 
 			bool done = false;
 			while (!done)
@@ -44,7 +44,7 @@ namespace com.SonOfSofaman.Heromatic
 			Place place = this.GameState.Character.CurrentPlace;
 			if (this.RNG.NextDouble() < place.Fondness)
 			{
-				this.OnSimulatorEvent(String.Format("{0} stays awhile in {1}.", this.GameState.Character, this.GameState.Character.CurrentPlace.Name));
+				this.OnSimulatorEvent(string.Format("{0} stays awhile in {1}.", this.GameState.Character, this.GameState.Character.CurrentPlace.Name));
 			}
 			else
 			{
@@ -66,7 +66,7 @@ namespace com.SonOfSofaman.Heromatic
 				}
 				this.GameState.Character.Visit(routeToNextPlace.Destination);
 				string placeMemo = isANewPlace ? ", a place he has never been to before." : ".";
-				this.OnSimulatorEvent(String.Format("{0} travels to {1}{2}", this.GameState.Character, this.GameState.Character.CurrentPlace.Name, placeMemo));
+				this.OnSimulatorEvent(string.Format("{0} travels to {1}{2}", this.GameState.Character, this.GameState.Character.CurrentPlace.Name, placeMemo));
 			}
 
 			// Step 3: Update the character
