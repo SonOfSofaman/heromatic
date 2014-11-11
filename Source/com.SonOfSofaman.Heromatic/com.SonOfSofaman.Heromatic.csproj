@@ -42,9 +42,16 @@
     <Compile Include="Character.cs" />
     <Compile Include="CharacterBuilder.cs" />
     <Compile Include="Direction.cs" />
+    <Compile Include="Encounters\Encounter.cs" />
+    <Compile Include="EncounterBuilder.cs" />
+    <Compile Include="EncounterBuilderEventArgs.cs" />
+    <Compile Include="EncounterBuilderEventHandler.cs" />
+    <Compile Include="Encounters\NOPEncounter.cs" />
+    <Compile Include="Encounters\NOPResolver.cs" />
     <Compile Include="Fondness.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="GameStateBuilder.cs" />
+    <Compile Include="Encounters\IEncounterResolver.cs" />
     <Compile Include="NameGenerator.cs" />
     <Compile Include="OrdinalExtensions.cs" />
     <Compile Include="Place.cs" />

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using com.SonOfSofaman.Heromatic.Encounters;
+
 namespace com.SonOfSofaman.Heromatic
 {
 	public class Simulator
@@ -10,12 +12,15 @@ namespace com.SonOfSofaman.Heromatic
 		private GameState GameState;
 		private ulong TurnIndex;
 		public SimulatorEventHandler SimulatorEvent { get; set; }
+		private EncounterBuilder EncounterBuilder;
 
 		public Simulator(Random rng, GameState gameState)
 		{
 			this.RNG = rng;
 			this.GameState = gameState;
 			this.TurnIndex = 0UL;
+			this.EncounterBuilder = new EncounterBuilder(rng, gameState);
+			this.EncounterBuilder.EncounterBuilderEvent += (object sender, EncounterBuilderEventArgs e) => { this.OnSimulatorEvent(e.Message); };
 		}
 
 		protected virtual void OnSimulatorEvent(string message)
@@ -38,7 +43,12 @@ namespace com.SonOfSofaman.Heromatic
 		private bool NextTurn()
 		{
 			// Step 1: Resolve any encounters
-			// TODO: Implement an encounter generator and resolver. The result of any encounter may affect a character's fondness of place in which the encounter took place.
+			if (this.RNG.NextDouble() < 0.1)
+			{
+				Encounter encounter = this.EncounterBuilder.Construct();
+				encounter.Resolve();
+				this.GameState.Encounters.Add(encounter);
+			}
 
 			// Step 2: Move (or stay)
 			Place place = this.GameState.Character.CurrentPlace;
