@@ -41,13 +41,18 @@
   <ItemGroup>
     <Compile Include="Character.cs" />
     <Compile Include="CharacterBuilder.cs" />
+    <Compile Include="CharacterEventArgs.cs" />
+    <Compile Include="CharacterEventHandler.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Encounters\Encounter.cs" />
-    <Compile Include="EncounterBuilder.cs" />
-    <Compile Include="EncounterBuilderEventArgs.cs" />
-    <Compile Include="EncounterBuilderEventHandler.cs" />
-    <Compile Include="Encounters\NOPEncounter.cs" />
-    <Compile Include="Encounters\NOPResolver.cs" />
+    <Compile Include="Encounters\EncounterBuilder.cs" />
+    <Compile Include="Encounters\EncounterBuilderEventArgs.cs" />
+    <Compile Include="Encounters\EncounterBuilderEventHandler.cs" />
+    <Compile Include="Encounters\EncounterDirector.cs" />
+    <Compile Include="Encounters\EncounterEventArgs.cs" />
+    <Compile Include="Encounters\EncounterEventHandler.cs" />
+    <Compile Include="Encounters\NOPEncounterResolver.cs" />
+    <Compile Include="Encounters\NOPEncounterBuilder.cs" />
     <Compile Include="Fondness.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="GameStateBuilder.cs" />

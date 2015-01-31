@@ -13,6 +13,7 @@ namespace com.SonOfSofaman.Heromatic.CLI
 
 				Random RNG = new Random(parameters.Seed);
 				GameState gameState = GameStateBuilder.Construct(RNG, parameters.ManualCharacterName, parameters.CharacterName);
+				gameState.Character.CharacterEvent += (object sender, CharacterEventArgs e) => { Console.WriteLine("\t{0}", e.Message); };
 				Simulator simulator = new Simulator(RNG, gameState);
 				simulator.SimulatorEvent += (object sender, SimulatorEventArgs e) => { Console.WriteLine("{0}\t{1}", e.TurnIndex, e.Message); };
 				simulator.Run();

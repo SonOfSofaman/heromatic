@@ -12,15 +12,12 @@ namespace com.SonOfSofaman.Heromatic
 		private GameState GameState;
 		private ulong TurnIndex;
 		public SimulatorEventHandler SimulatorEvent { get; set; }
-		private EncounterBuilder EncounterBuilder;
 
 		public Simulator(Random rng, GameState gameState)
 		{
 			this.RNG = rng;
 			this.GameState = gameState;
 			this.TurnIndex = 0UL;
-			this.EncounterBuilder = new EncounterBuilder(rng, gameState);
-			this.EncounterBuilder.EncounterBuilderEvent += (object sender, EncounterBuilderEventArgs e) => { this.OnSimulatorEvent(e.Message); };
 		}
 
 		protected virtual void OnSimulatorEvent(string message)
@@ -45,8 +42,14 @@ namespace com.SonOfSofaman.Heromatic
 			// Step 1: Resolve any encounters
 			if (this.RNG.NextDouble() < 0.1)
 			{
-				Encounter encounter = this.EncounterBuilder.Construct();
+				EncounterBuilder encounterBuilder = new NOPEncounterBuilder(this.RNG, this.GameState);
+				encounterBuilder.EncounterBuilderEvent += (object sender, EncounterBuilderEventArgs e) => { this.OnSimulatorEvent(e.Message); };
+
+				EncounterDirector.Construct(encounterBuilder);
+				Encounter encounter = encounterBuilder.GetEncounter();
+				encounter.EncounterEvent += (object sender, EncounterEventArgs e) => { this.OnSimulatorEvent(e.Message); };
 				encounter.Resolve();
+
 				this.GameState.Encounters.Add(encounter);
 			}
 
@@ -80,13 +83,7 @@ namespace com.SonOfSofaman.Heromatic
 			}
 
 			// Step 3: Update the character
-			double before = Math.Floor(this.GameState.Character.Age);
 			this.GameState.Character.NextTurn();
-			double after = Math.Floor(this.GameState.Character.Age);
-			if (after > before)
-			{
-				this.OnSimulatorEvent(string.Format("{0} celebrates his {1} birthday!", this.GameState.Character, after.ToEnglishOrdinal()));
-			}
 
 			this.TurnIndex++;
 			return (this.TurnIndex >= 100UL);

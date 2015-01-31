@@ -1,4 +1,4 @@
-﻿namespace com.SonOfSofaman.Heromatic
+﻿namespace com.SonOfSofaman.Heromatic.Encounters
 {
 	public class EncounterBuilderEventArgs
 	{
